@@ -11,3 +11,19 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?acce
 	id: "light-v10",
 	accessToken: API_KEY
 }).addTo(myMap);
+
+// Store our API endpoint inside queryUrl
+var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+// Grab the data with d3
+d3.json(queryUrl).then(function(data) {
+
+	// Create function to color cicles according to earthquake magnitudes
+	function getColor(d) {
+    return d >= 5 ? "rgb(240, 107, 107)" :
+           d >= 4 ? "rgb(240, 167, 107)" :
+           d >= 3 ? "rgb(243, 186, 77)" :
+					 d >= 2 ? "rgb(243, 219, 77)" :
+					 d >= 1 ? "rgb(225, 243, 77)" :
+					 					"rgb(183, 243, 77)";
+	}
