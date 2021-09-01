@@ -49,3 +49,11 @@ d3.json(queryUrl).then(function(data) {
 				"</h3><hr><p>" + new Date(features[i].properties.time) + 
 				'<br>' + '[' + coordinates[1] + ', ' + coordinates[0] + ']' + "</p>").addTo(myMap);
 	};	
+
+// Legend for the chart
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function () {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 1, 2, 3, 4, 5],
+        labels = [];
