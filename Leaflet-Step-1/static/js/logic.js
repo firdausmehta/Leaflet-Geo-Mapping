@@ -27,3 +27,15 @@ d3.json(queryUrl).then(function(data) {
 					 d >= 1 ? "rgb(225, 243, 77)" :
 					 					"rgb(183, 243, 77)";
 	}
+
+    // Grab the features data
+	var features = data.features;
+
+	for (var i = 0; i < features.length; i++) {
+		
+		//Define variable magnitudes and coordinates of the earthquakes
+		var magnitudes = features[i].properties.mag;
+		var coordinates = features[i].geometry.coordinates;
+
+		// Add circles to map
+		L.circle(
