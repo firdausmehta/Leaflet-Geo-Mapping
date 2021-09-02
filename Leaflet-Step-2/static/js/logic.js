@@ -57,3 +57,16 @@ var overlayMaps = {
 L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
 }).addTo(myMap);
+
+// Store our API endpoints
+var tectonicUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
+var earthquakeUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+
+// Perform a call to the tectonic endpoint
+d3.json(tectonicUrl).then(function(infoTec) {
+
+	// Grab the features tectonic data
+	var tecFeatures = infoTec.features;
+
+	for (var i = 0; i < tecFeatures.length; i++) {
