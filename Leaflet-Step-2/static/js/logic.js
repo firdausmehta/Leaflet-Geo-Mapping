@@ -89,3 +89,26 @@ d3.json(tectonicUrl).then(function(infoTec) {
 		lines.addTo(layers.TECTONIC_LINE);
 	};
 });
+
+
+// Create function to color cicles according to earthquake magnitudes
+function getColor(d) {
+	return d >= 5 ? "rgb(240, 107, 107)" :
+					d >= 4 ? "rgb(240, 167, 107)" :
+					d >= 3 ? "rgb(243, 186, 77)" :
+					d >= 2 ? "rgb(243, 219, 77)" :
+					d >= 1 ? "rgb(225, 243, 77)" :
+										"rgb(183, 243, 77)";
+};
+
+// Perform an API call to the earthquake data endpoint
+d3.json(earthquakeUrl).then(function(infoEarth) {
+	
+	// Grab the features earthquake data
+	var earthFeatures = infoEarth.features;
+
+	for (var i = 0; i < earthFeatures.length; i++) {
+		
+		//Define variable magnitudes and coordinates of the earthquakes
+		var magnitudes = earthFeatures[i].properties.mag;
+		var coordinates = earthFeatures[i].geometry.coordinates;
