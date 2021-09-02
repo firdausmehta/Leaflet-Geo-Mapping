@@ -42,3 +42,18 @@ var myMap = L.map("map", {
 		layers.EARTHQUAKES
 	]
 });
+
+// Add satellite layer to the map
+satellite.addTo(myMap);
+
+// Create an overlay object to add to the layer control
+var overlayMaps = {
+	"Fault Lines": layers.TECTONIC_LINE,
+  "Earthquakes": layers.EARTHQUAKES
+};
+
+// Pass our map layers into our layer control
+// Add the layer control to the map
+L.control.layers(baseMaps, overlayMaps, {
+  collapsed: false
+}).addTo(myMap);
