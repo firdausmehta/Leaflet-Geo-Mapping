@@ -70,3 +70,22 @@ d3.json(tectonicUrl).then(function(infoTec) {
 	var tecFeatures = infoTec.features;
 
 	for (var i = 0; i < tecFeatures.length; i++) {
+
+    // Because the coordinates in geojson are ordered reversely against what 
+		// should be passed into Leaflet to be rendered correctly, we'll create an array to
+		// reorder each pair of coordinates
+		var coordinates = tecFeatures[i].geometry.coordinates;
+
+		var orderedCoordinates = [];
+
+		orderedCoordinates.push(
+			coordinates.map(coordinate => [coordinate[1], coordinate[0]])
+		);
+
+		// Create tectonic lines
+		var lines = L.polyline(orderedCoordinates, {color: "rgb(255, 165, 0)"});
+		
+		// Add the new marker to the appropriate layer
+		lines.addTo(layers.TECTONIC_LINE);
+	};
+});
