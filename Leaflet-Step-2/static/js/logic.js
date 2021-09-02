@@ -26,3 +26,19 @@ var baseMaps = {
 	"Grayscale": grayscale,
 	"Outdoors": outdoors
 };
+
+// Initialize all of the LayerGroups we'll be using
+var layers = {
+  TECTONIC_LINE: new L.LayerGroup(),
+  EARTHQUAKES: new L.LayerGroup()
+};
+
+// Define a map object
+var myMap = L.map("map", {
+	center: [23.6978, 120.9605],
+	zoom: 4,
+  layers: [
+		layers.TECTONIC_LINE,
+		layers.EARTHQUAKES
+	]
+});
