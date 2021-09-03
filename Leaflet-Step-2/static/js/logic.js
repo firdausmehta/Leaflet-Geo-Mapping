@@ -112,3 +112,23 @@ d3.json(earthquakeUrl).then(function(infoEarth) {
 		//Define variable magnitudes and coordinates of the earthquakes
 		var magnitudes = earthFeatures[i].properties.mag;
 		var coordinates = earthFeatures[i].geometry.coordinates;
+
+// Add circles and bind PopUps to map
+var circleMarkers = L.circle(
+	[coordinates[1], coordinates[0]], {
+		fillOpacity: 0.9,
+		fillColor: getColor(magnitudes),
+		color: getColor(magnitudes),
+		stroke: false,
+		radius: magnitudes * 17000
+	});
+
+// Add the new marker to the appropriate layer
+circleMarkers.addTo(layers.EARTHQUAKES);
+
+// Bind a popup to the marker that will  display on click. This will be rendered as HTML
+circleMarkers.bindPopup("<h3>" + earthFeatures[i].properties.place +
+"</h3><hr><p>" + new Date(earthFeatures[i].properties.time) + 
+'<br>' + '[' + coordinates[1] + ', ' + coordinates[0] + ']' + "</p>");
+};
+});
